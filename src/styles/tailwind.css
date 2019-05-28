@@ -1,7 +1,5 @@
 @tailwind base;
 
-@tailwind preflight;
-
 @tailwind components;
 
 @tailwind utilities;
