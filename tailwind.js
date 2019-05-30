@@ -10,6 +10,7 @@ module.exports = {
         "custom-big-dip-oruby": "#8B1E3F",
         "custom-dark-purple": "#3C153B",
         "custom-light-purple": "#5F3F5E",
+        "custom-lighter-purple": "#8A7389",
         "custom-dark-sea-green": "#89BD9E",
         "custom-light-sea-green": "#A9CFB8",
         "custom-lighter-sea-green": "#B3D5C1",
