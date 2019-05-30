@@ -1,5 +1,5 @@
 import React from "react";
-import { NewTrade } from "./NewTrade";
+import NewTrade from "./NewTrade";
 
 export default function App() {
   return (
