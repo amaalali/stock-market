@@ -1,4 +1,5 @@
 import { NEW_TRADE } from "./actionTypes";
+import { TimeStamp } from "../utils/DateStampGenerator";
 
 export function addNewTrade(symbol, price, quantity) {
   return {
@@ -6,7 +7,8 @@ export function addNewTrade(symbol, price, quantity) {
     payload: {
       symbol,
       price,
-      quantity
+      quantity,
+      createdAt: TimeStamp()
     }
   };
 }

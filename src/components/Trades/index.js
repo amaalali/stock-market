@@ -21,8 +21,8 @@ const Trades = ({ trades }) => (
           <div className="text-lg w-16 ">Quantity</div>
         </li>
 
-        {trades.map(({ symbol, price, quantity }) => (
-          <li className="flex flex-row mb-1">
+        {trades.map(({ symbol, price, quantity, createdAt }) => (
+          <li key={createdAt} className="flex flex-row mb-1">
             <Trade symbol={symbol} price={price} quantity={quantity} />
           </li>
         ))}
