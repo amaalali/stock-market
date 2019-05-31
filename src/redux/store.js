@@ -6,12 +6,14 @@ const initialState = {
   trades: []
 };
 
+export const getTrades = state => ({ trades: state.trades });
+
 function reducer(state = initialState, action) {
   switch (action.type) {
     case NEW_TRADE:
       return {
         ...state,
-        trades: [...state.trades, action.payload]
+        trades: [action.payload, ...state.trades]
       };
     default:
       return state;

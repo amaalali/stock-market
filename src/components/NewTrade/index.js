@@ -3,19 +3,14 @@ import { connect } from "react-redux";
 import { addNewTrade } from "../../redux/actions";
 import InputField from "./InputField";
 
-const handleEvent = eventHandler => (symbol, price, numberOfShares) => e => {
-  e.preventDefault();
-  eventHandler(symbol, price, numberOfShares);
-};
-
 class NewTrade extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       "stock-symbol": "",
-      "stock-price": undefined,
-      "number-of-shares": undefined
+      "stock-price": "",
+      quantity: ""
     };
   }
 
@@ -25,6 +20,20 @@ class NewTrade extends React.Component {
     this.setState({ [name]: value });
   };
 
+  onSubmit = onClickHandler => e => {
+    e.preventDefault();
+    onClickHandler(
+      this.state["stock-symbol"],
+      this.state["stock-price"],
+      this.state.quantity
+    );
+    this.setState({
+      "stock-symbol": "",
+      "stock-price": "",
+      quantity: ""
+    });
+  };
+
   // TODO: Add validation for form fields here
   validator(e) {
     switch (e.target.name) {
@@ -32,7 +41,7 @@ class NewTrade extends React.Component {
         return e;
       case "stock-price":
         return e;
-      case "number-of-shares":
+      case "quantity":
         return e;
     }
   }
@@ -69,11 +78,11 @@ class NewTrade extends React.Component {
 
             <div className="flex flex-col mt-4 lg:ml-2 lg:mt-0">
               <InputField
-                inputName="number-of-shares"
-                value={this.state["number-of-shares"]}
+                inputName="quantity"
+                value={this.state["quantity"]}
                 onChange={this.onChangeHandler}
               >
-                Number of shares
+                Quantity
               </InputField>
             </div>
           </div>
@@ -81,12 +90,8 @@ class NewTrade extends React.Component {
           <button
             type="submit"
             alt="Submit new trade"
-            className="bg-custom-light-purple hover:bg-custom-dark-purple text-white rounded-full h-12 w-12 float-right m-4"
-            onClick={handleEvent(onClick)(
-              this.state["stock-symbol"],
-              this.state["stock-price"],
-              this.state["number-of-shares"]
-            )}
+            className="bg-custom-light-purple hover:bg-custom-dark-purple text-custom-pale-gold font-bold rounded-full h-12 w-12 float-right m-4"
+            onClick={this.onSubmit(onClick)}
           >
             +
           </button>
