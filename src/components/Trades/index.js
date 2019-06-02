@@ -4,9 +4,15 @@ import { getTrades } from "../../redux/store";
 
 const Trade = ({ symbol, price, quantity }) => (
   <>
-    <div className="w-16 mr-16">{symbol}</div>
-    <div className="w-16 mr-16">{price}</div>
-    <div className="w-16 ">{quantity}</div>
+    <div className="w-16 mr-16" data-testid="recent-trades__row--symbol">
+      {symbol}
+    </div>
+    <div className="w-16 mr-16" data-testid="recent-trades__row--price">
+      {price}
+    </div>
+    <div className="w-16" data-testid="recent-trades__row--quantity">
+      {quantity}
+    </div>
   </>
 );
 
@@ -21,8 +27,12 @@ const Trades = ({ trades }) => (
           <div className="text-lg w-16 ">Quantity</div>
         </li>
 
-        {trades.map(({ symbol, price, quantity, createdAt }) => (
-          <li key={createdAt} className="flex flex-row mb-1">
+        {trades.map(({ symbol, price, quantity, createdAt }, index) => (
+          <li
+            key={createdAt + "-" + symbol + "-" + price + "quantity"}
+            className="flex flex-row mb-1"
+            data-testid={`recent-trades__row-${index + 1}`}
+          >
             <Trade symbol={symbol} price={price} quantity={quantity} />
           </li>
         ))}
