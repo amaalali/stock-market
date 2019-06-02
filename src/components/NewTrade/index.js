@@ -43,6 +43,8 @@ class NewTrade extends React.Component {
         return e;
       case "quantity":
         return e;
+      default:
+        return e;
     }
   }
 
@@ -92,6 +94,7 @@ class NewTrade extends React.Component {
             alt="Submit new trade"
             className="bg-custom-light-purple hover:bg-custom-dark-purple text-custom-pale-gold font-bold rounded-full h-12 w-12 float-right m-4"
             onClick={this.onSubmit(onClick)}
+            data-testid="submit-trade"
           >
             +
           </button>

@@ -41,6 +41,9 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^1.0.1"
+    "@testing-library/dom": "^5.1.1",
+    "jest-dom": "^3.4.0",
+    "tailwindcss": "^1.0.1",
+    "user-event": "^3.0.3"
   }
 }

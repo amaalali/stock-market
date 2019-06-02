@@ -8,7 +8,7 @@ const initialState = {
 
 export const getTrades = state => ({ trades: state.trades });
 
-function reducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
   switch (action.type) {
     case NEW_TRADE:
       return {
