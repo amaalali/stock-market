@@ -1,7 +1,7 @@
 import React from "react";
 import { cleanup } from "react-testing-library";
-import NewTrade from "./index";
-import { renderWithRedux } from "../../test-utils";
+import NewTrade from "../components/NewTrade/index";
+import { renderWithRedux } from "./test-utils";
 import userEvent from "user-event";
 
 afterEach(cleanup);

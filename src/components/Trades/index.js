@@ -1,20 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getTrades } from "../../redux/store";
-
-const Trade = ({ symbol, price, quantity }) => (
-  <>
-    <div className="w-16 mr-16" data-testid="recent-trades__row--symbol">
-      {symbol}
-    </div>
-    <div className="w-16 mr-16" data-testid="recent-trades__row--price">
-      {price}
-    </div>
-    <div className="w-16" data-testid="recent-trades__row--quantity">
-      {quantity}
-    </div>
-  </>
-);
+import Trade from "./SingleTradeRow";
 
 const Trades = ({ trades }) => (
   <div className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple">

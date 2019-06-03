@@ -1,33 +1,12 @@
 import React from "react";
-import {
-  cleanup,
-  waitForElement,
-  waitForDomChange
-} from "react-testing-library";
-import { renderWithRedux } from "../test-utils";
+import { cleanup } from "react-testing-library";
+import { renderWithRedux } from "./test-utils";
 import userEvent from "user-event";
-import App from "./index";
-import { Exception } from "handlebars";
+import App from "../components/index";
 
 afterEach(cleanup);
 
 const renderApp = () => renderWithRedux()(<App />);
-
-const enterNewTrade = (symbol, price, quantity) => ({
-  getByLabelText,
-  getByTestId
-}) => {
-  const symbolInput = getByLabelText("Symbol for stock");
-  userEvent.type(symbolInput, symbol);
-
-  const priceInput = getByLabelText("Price");
-  userEvent.type(priceInput, price);
-
-  const quantityInput = getByLabelText("Quantity");
-  userEvent.type(quantityInput, quantity);
-
-  userEvent.click(getByTestId("submit-trade"));
-};
 
 test("on submit of a new trade, the trade is displayed in Recent Trades section", async () => {
   const selectors = renderApp();
@@ -51,3 +30,18 @@ test("the most recent trade is displayed at the top of the Recent Trades section
   expect(trades.length).toBe(5);
   expect(trades[0]).toHaveTextContent("TRD5");
 });
+
+function enterNewTrade(symbol, price, quantity) {
+  return ({ getByLabelText, getByTestId }) => {
+    const symbolInput = getByLabelText("Symbol for stock");
+    userEvent.type(symbolInput, symbol);
+
+    const priceInput = getByLabelText("Price");
+    userEvent.type(priceInput, price);
+
+    const quantityInput = getByLabelText("Quantity");
+    userEvent.type(quantityInput, quantity);
+
+    userEvent.click(getByTestId("submit-trade"));
+  };
+}
