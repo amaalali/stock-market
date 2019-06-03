@@ -13,7 +13,9 @@ test("on submit of a new trade, the trade is displayed in Recent Trades section"
 
   enterNewTrade("TRD1", "123.00", "123")(selectors);
 
-  selectors.getByText("TRD1");
+  const stocksSummariesSection = selectors.getByTestId("stocks-summaries");
+
+  within(stocksSummariesSection).getByText("TRD1");
 });
 
 test("the most recent trade is displayed at the top of the Recent Trades section", async () => {

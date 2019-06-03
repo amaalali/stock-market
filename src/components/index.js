@@ -1,6 +1,7 @@
 import React from "react";
 import NewTrade from "./NewTrade";
 import Trades from "./Trades";
+import StocksSummaries from "./StocksSummaries";
 
 export default function App() {
   return (
@@ -8,6 +9,8 @@ export default function App() {
       <NewTrade />
 
       <Trades />
+
+      <StocksSummaries />
     </main>
   );
 }

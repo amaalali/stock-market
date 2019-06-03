@@ -3,10 +3,14 @@ import { devToolsEnhancer } from "redux-devtools-extension";
 import { NEW_TRADE } from "./actionTypes";
 
 const initialState = {
-  trades: []
+  trades: [],
+  stocksSummaries: {}
 };
 
 export const getTrades = state => ({ trades: state.trades });
+export const getStocksSummaries = state => ({
+  stocks: Object.values(state.stocksSummaries)
+});
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
