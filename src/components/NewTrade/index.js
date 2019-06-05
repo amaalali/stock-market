@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addNewTrade } from "../../redux/actions";
+import { addNewTrade } from "../../redux/actionsCreators";
 import InputField from "./InputField";
 
 class NewTrade extends React.Component {

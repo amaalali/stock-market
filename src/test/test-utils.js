@@ -5,7 +5,9 @@ import { reducer } from "../redux/store";
 import { Provider } from "react-redux";
 
 const defaultInitialState = {
-  trades: []
+  tradesChronology: [],
+  tradesIndex: {},
+  stocksSummaries: {}
 };
 
 export const renderWithRedux = (
