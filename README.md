@@ -1,68 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Simple Stock Market
 
-## Available Scripts
+## Running and testing
 
-In the project directory, you can run:
+- Run app using
 
-### `npm start`
+  `yarn start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  and visit port displayed in terminal.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Run test using
 
-### `npm test`
+  `yarn test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Design decisions
 
-### `npm run build`
+### Testing
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Testing framework - Jest. Easy to use and very good cli.
+Framework testing - `react-testing-library` (now hosted at `@testing-library/react`) and `user-event`. This library provides testing utilities that promote more robust test, which are closer to integration tests and focus on testing components in a manner that is closer to how a user views and interacts with the an app and discourages testing implementation details.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Calculations for stocksSummaries
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To avoid having to recompute values using all the trades for each stock on a new trade being added, intermediate calculations for _Geometric Mean_, andd _Volume Weighted Stock Price_ are cached in the store (eg: previousPriceProduct, previousGeometricMeanRoot, etc). This should make calculation of these values of order constant time. (_Note_: see considerations of this in the section below)
 
-### `npm run eject`
+**Limitation** - since the values are computed using cached values and not computed on the full data set each time, adding functionality like revoking/removing a trade with make updating the stock summary non-trivial as compared to doing naive recalculation each time. In this case, since trades are something that are unlikely to be revoked/removed this may be an acceptable compromise.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Exposing values as only strings from the store
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Since all calculations are done in the reducer, the decision was made to expose numeric values (MathJS numeric types) as strings. This forces us to ensure that all computation logic are removed from React Components which will only have rendering logic.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### MathJS for computations
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This library provides provides more robust data types or computation, in this case we make use of their BigNumber data type (based on decimal.js). This
 
-## Learn More
+### Normalization of stocksSummaries and globalBeverageCorporationExchange
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+compare to normalizr
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Future improvements
