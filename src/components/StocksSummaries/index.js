@@ -18,7 +18,10 @@ const Header = () => (
 
 const StocksSummaries = ({ stocks = [] } = {}) => {
   return (
-    <div className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple">
+    <section
+      className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple"
+      data-testid="stocks-summaries"
+    >
       <h2 className="text-2xl mx-4 my-6">Stocks Summaries</h2>
       <div className="mx-4 my-6">
         <ul className="flex flex-col">
@@ -27,20 +30,20 @@ const StocksSummaries = ({ stocks = [] } = {}) => {
             <li
               key={stock.symbol}
               className="flex flex-row mb-1"
-              data-testid={`recent-trades__row-${index + 1}`}
+              data-testid={`stocks-summaries__row-${index + 1}`}
             >
               <SingleTradeRow
                 symbol={stock.symbol}
-                dividendYield={stock.dividendYield || 0}
-                peRatio={stock.peRatio || 0}
-                geometricMean={stock.geometricMean || 0}
-                volumeWeightedStockPrice={stock.volumeWeightedStockPrice || 0}
+                dividendYield={stock.dividendYield}
+                peRatio={stock.peRatio}
+                geometricMean={stock.geometricMean}
+                volumeWeightedStockPrice={stock.volumeWeightedStockPrice}
               />
             </li>
           ))}
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 

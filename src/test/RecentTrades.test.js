@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanup } from "@testing-library/react";
+import { cleanup, within } from "@testing-library/react";
 import { renderWithRedux } from "./test-utils";
 import userEvent from "@testing-library/user-event";
 import App from "../components/index";
@@ -8,12 +8,12 @@ afterEach(cleanup);
 
 const renderApp = () => renderWithRedux()(<App />);
 
-test("on submit of a new trade, the trade is displayed in Recent Trades section", async () => {
+test("on submit of a new trade, the stock performance summary is displayed", async () => {
   const selectors = renderApp();
 
   enterNewTrade("TRD1", "123.00", "123")(selectors);
 
-  const stocksSummariesSection = selectors.getByTestId("stocks-summaries");
+  const stocksSummariesSection = selectors.getByTestId("recent-trades");
 
   within(stocksSummariesSection).getByText("TRD1");
 });

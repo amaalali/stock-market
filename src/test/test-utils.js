@@ -1,14 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { createStore } from "redux";
-import { reducer } from "../redux/store";
 import { Provider } from "react-redux";
 
-const defaultInitialState = {
-  tradesChronology: [],
-  tradesIndex: {},
-  stocksSummaries: {}
-};
+import { initialState as defaultInitialState } from "../redux/store";
+import reducer from "../redux/reducers";
 
 export const renderWithRedux = (
   initialState = defaultInitialState

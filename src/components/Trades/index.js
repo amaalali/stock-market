@@ -5,10 +5,13 @@ import Trade from "./SingleTradeRow";
 import maths from "mathjs";
 
 const Trades = ({ trades }) => (
-  <div className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple">
+  <section
+    className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple"
+    data-testid="recent-trades"
+  >
     <h2 className="text-2xl mx-4 my-6">Recent Trades</h2>
-    <div className="mx-4 my-6">
-      <ul className="flex flex-col">
+    <div className="mx-4 my-6 flex flex-col">
+      <ul>
         <li className="flex flex-row mb-2">
           <div className="text-lg w-16 mr-16">Symbol</div>
           <div className="text-lg w-16 mr-16">Price</div>
@@ -32,7 +35,7 @@ const Trades = ({ trades }) => (
         ))}
       </ul>
     </div>
-  </div>
+  </section>
 );
 
 export default connect(getTrades)(Trades);

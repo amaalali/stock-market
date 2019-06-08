@@ -53,8 +53,16 @@ const asString = (mathJsValue, levelOfAccuracy = ARBITRARY_LEVEL_OF_ACCURACY) =>
 
 export const getStocksSummaries = state => {
   const stockSummaries = Object.values(state.stocksSummaries).map(
-    ({ geometricMean, volumeWeightedStockPrice, ...stockDetails }) => ({
+    ({
+      dividendYield,
+      peRatio,
+      geometricMean,
+      volumeWeightedStockPrice,
+      ...stockDetails
+    }) => ({
       ...stockDetails,
+      peRatio: peRatio ? asString(peRatio) : "N/A",
+      dividendYield: dividendYield ? asString(dividendYield) : "N/A",
       geometricMean: asString(geometricMean),
       volumeWeightedStockPrice: asString(volumeWeightedStockPrice)
     })
@@ -66,6 +74,8 @@ export const getStocksSummaries = state => {
 export const getStockSummary = (state, symbol) =>
   state.stocksSummaries[symbol] || {};
 
+export const getExchangeDataForStock = (state, symbol) =>
+  state.globalBeverageCorporationExchange.entities.stock[symbol] || {};
 /*
 
   Initialised Redux store

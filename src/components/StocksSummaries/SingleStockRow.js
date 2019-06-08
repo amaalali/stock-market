@@ -38,7 +38,7 @@ const SingleTradeRow = ({
 
     <div
       className="w-20 text-right font-mono"
-      data-testid="stocks-summaries__volume-weighted-stock-price"
+      data-testid="stocks-summaries__row--volume-weighted-stock-price"
     >
       {volumeWeightedStockPrice}
     </div>

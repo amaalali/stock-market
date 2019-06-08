@@ -1,10 +1,12 @@
 import maths from "mathjs";
 
-import { getStockSummary } from "../store";
+import { getStockSummary, getExchangeDataForStock } from "../store";
 import { NEW_TRADE } from "../actionTypes";
 import {
   newGeometricProgressionCalculator,
-  newVolumeWeightedStockPriceCalculator
+  newVolumeWeightedStockPriceCalculator,
+  newDividendYieldCalculator,
+  newPERatioCalculator
 } from "../../calculators";
 
 export function stockSummaryReducer(state, action) {
@@ -40,13 +42,27 @@ export function stockSummaryReducer(state, action) {
         previousSumQuantity
       );
 
-      const newState = {
+      const stockExchangeData = getExchangeDataForStock(state, symbol);
+
+      const newDividendYield = newDividendYieldCalculator(
+        price,
+        stockExchangeData
+      );
+
+      const newPeRatio = newPERatioCalculator(
+        price,
+        stockExchangeData.lastDividend
+      );
+
+      return {
         ...state,
         stocksSummaries: {
           ...state.stocksSummaries,
           [symbol]: {
             symbol,
             ...state.stocksSummaries[symbol],
+            peRatio: newPeRatio,
+            dividendYield: newDividendYield,
             geometricMean: newGeometricMean,
             previousPriceProduct: newPriceProduct,
             previousGeometricMeanRoot: newGeometricMeanRoot,
@@ -56,8 +72,6 @@ export function stockSummaryReducer(state, action) {
           }
         }
       };
-
-      return newState;
 
     default:
       return state;
