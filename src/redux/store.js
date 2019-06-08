@@ -1,14 +1,21 @@
 import { createStore } from "redux";
-import reduceReducers from "reduce-reducers";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import maths from "mathjs";
+import GBCEData from "../data/globalBeverageCorporationExchange";
 import reducer from "./reducers";
+import { normalize, schema } from "normalizr";
+
+const dataSchema = new schema.Entity("stock", {}, { idAttribute: "symbol" });
+export const normalizedData = normalize(GBCEData, [dataSchema]);
 
 /*
-  Initial Store
+
+  Initial state of Store
+
 */
+
 export const initialState = Object.freeze({
-  globalBeverageCorporationExchange: GBCE.data,
+  globalBeverageCorporationExchange: normalizedData,
   tradesChronology: [],
   stockTradeIndex: {},
   stocksSummaries: {}
