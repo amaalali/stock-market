@@ -28,7 +28,6 @@ export function stockSummaryReducer(state, action) {
         previousPriceProduct,
         previousGeometricMeanRoot
       );
-      
 
       const {
         newVolumeWeightedStockPrice,

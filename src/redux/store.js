@@ -2,9 +2,7 @@ import { createStore } from "redux";
 import reduceReducers from "reduce-reducers";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import maths from "mathjs";
-import GBCE from "../data/globalBeverageCorporationExchange";
-import { stockSummaryReducer } from "./reducers/volumeWeigthedStockPriceReducer";
-import { tradesChronologyReducer } from "./reducers/tradesChronologyReducer";
+import reducer from "./reducers";
 
 /*
   Initial Store
@@ -32,28 +30,28 @@ export const initialState = Object.freeze({
     }
 */
 
-const priceAsString = trade => ({ ...trade, price: maths.string(trade.price) });
-
 /*
+
   Store Getters
+
 */
+const priceAsString = trade => ({ ...trade, price: maths.string(trade.price) });
 export const getTrades = state => ({
   trades: state.tradesChronology.map(priceAsString)
 });
 
-// Arbitrarily chosen level of accuracy
-const ARBITRARY_LEVEL_OF_ACCURACY = 4;
+const ARBITRARY_LEVEL_OF_ACCURACY = 4; // Arbitrarily chosen level of accuracy
 const asString = (mathJsValue, levelOfAccuracy = ARBITRARY_LEVEL_OF_ACCURACY) =>
   mathJsValue.toFixed(levelOfAccuracy);
 
 export const getStocksSummaries = state => {
-  const stockSummaries = Object.values(state.stocksSummaries).map(x => ({
-    symbol: x.symbol,
-    dividendYield: x.dividendYield,
-    peRatio: x.peRatio,
-    geometricMean: asString(x.geometricMean),
-    volumeWeightedStockPrice: asString(x.volumeWeightedStockPrice)
-  }));
+  const stockSummaries = Object.values(state.stocksSummaries).map(
+    ({ geometricMean, volumeWeightedStockPrice, ...stockDetails }) => ({
+      ...stockDetails,
+      geometricMean: asString(geometricMean),
+      volumeWeightedStockPrice: asString(volumeWeightedStockPrice)
+    })
+  );
 
   return { stocks: stockSummaries };
 };
@@ -62,14 +60,8 @@ export const getStockSummary = (state, symbol) =>
   state.stocksSummaries[symbol] || {};
 
 /*
-  Composed Reducers
-*/
-export const reducer = reduceReducers(
-  tradesChronologyReducer,
-  stockSummaryReducer
-);
 
-/*
   Initialised Redux store
+  
 */
 export default createStore(reducer, initialState, devToolsEnhancer());

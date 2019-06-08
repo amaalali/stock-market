@@ -2,7 +2,7 @@ import maths from "mathjs";
 import { NEW_TRADE } from "../actionTypes";
 import { initialState } from "../store";
 
-// needs an inital state as this is the first reducer called
+// needs an initial state as this is the first reducer called
 export function tradesChronologyReducer(state = initialState, action) {
   switch (action.type) {
     case NEW_TRADE:
