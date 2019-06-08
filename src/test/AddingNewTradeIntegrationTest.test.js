@@ -1,7 +1,7 @@
 import React from "react";
-import { cleanup } from "react-testing-library";
+import { cleanup } from "@testing-library/react";
 import { renderWithRedux } from "./test-utils";
-import userEvent from "user-event";
+import userEvent from "@testing-library/user-event";
 import App from "../components/index";
 
 afterEach(cleanup);
