@@ -38,3 +38,23 @@ This library provides provides more robust data types or computation, in this ca
 compare to normalizr
 
 ## Future improvements
+
+- In the store, there is a field for `stockTradeIndex`. This was initially intended to as a way to split each trade by the stock symbol, but this functionally wasn't needed after all. So if a new trade for `XYZ` was recorded then the trade would be added to `tradesChronology` but also to `stockTradeIndex["XYZ"]` (see below). This would make it faster to perform computations on subsets of the trade data for a particular stock as we would not need to partition the full list of trades by symbol.
+
+Eg
+
+```
+  {
+    tradesChronology : [
+      { symbol: "XYZ", price: 1, quantity: 1, timestamp: Date}, // added here
+      ... <older trades for all stock> ...
+    ],
+    stockTradeIndex : {
+      "XYZ": [
+        { symbol: "XYZ", price: 1, quantity: 1, timestamp: Date}, // also added here
+        ... <older trades for "XYZ" only> ...
+      ]
+    },
+    ...
+  }
+```
