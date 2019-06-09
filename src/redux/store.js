@@ -1,6 +1,5 @@
 import { createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
-import maths from "mathjs";
 import GBCEData from "../data/globalBeverageCorporationExchange";
 import reducer from "./reducers";
 import { normalize, schema } from "normalizr";
