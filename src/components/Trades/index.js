@@ -11,9 +11,9 @@ const tableRowKey = (symbol, price, quantity, createdAt) =>
 const TableHeaderRow = () => (
   <thead className="table__header">
     <tr className="flex flex-row mb-2">
-      <th className="text-lg w-16 mr-16 font-normal">Symbol</th>
-      <th className="text-lg w-16 mr-16 font-normal">Price</th>
-      <th className="text-lg w-16 font-normal">Quantity</th>
+      <th className="w-16 mr-16 font-normal">Symbol</th>
+      <th className="w-16 mr-16 font-normal">Price</th>
+      <th className="w-16 font-normal">Quantity</th>
     </tr>
   </thead>
 );
@@ -38,10 +38,12 @@ const Trades = ({ trades }) => {
       className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple"
       data-testid="recent-trades"
     >
-      <h2 className="text-2xl mx-4 my-6">Recent Trades</h2>
-      <table className="mx-4 my-6 flex flex-col">
+      <h2 className="text-lg font-semibold md:text-2xl md:font-normal mx-4 my-6">
+        Recent Trades
+      </h2>
+      <table className="mx-4 my-6 flex flex-col text-base md:text-lg">
         <TableHeaderRow />
-        <tbody>
+        <tbody className="text-sm md:text-base">
           {noTrades ? (
             <NoTradesFillerRow colSpan={3} />
           ) : (

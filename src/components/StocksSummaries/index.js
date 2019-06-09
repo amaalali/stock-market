@@ -6,20 +6,13 @@ import { tableRowBackgroundIfEven } from "../helpers";
 import { NoTradesFillerRow } from "../NoTradesFillerRow";
 
 const TableHeaderRow = () => (
-  <thead className="table__header mb-2">
+  <thead className="table__header mb-2 text-base md:text-lg">
     <tr className="flex flex-row">
-      <th className="text-lg w-20 mr-16 text-center font-normal">Symbol</th>
-      <th className="text-lg w-20 mr-16 text-center font-normal">
-        Dividend Yield
-      </th>
-      <th className="text-lg w-20 mr-16 text-center font-normal">P/E Ratio</th>
-      <th className="text-lg w-20 mr-16 text-center font-normal">
-        Geometric Mean
-      </th>
-      <th
-        className="text-lg w-20 font-normal"
-        alt="Volume Weighted Stock Price"
-      >
+      <th className="w-20 mr-16 text-center font-normal">Symbol</th>
+      <th className="w-20 mr-16 text-center font-normal">Dividend Yield</th>
+      <th className="w-20 mr-16 text-center font-normal">P/E Ratio</th>
+      <th className="w-20 mr-16 text-center font-normal">Geometric Mean</th>
+      <th className="w-20 font-normal" alt="Volume Weighted Stock Price">
         {/* Volume Weighted Stock Price */}
         Volume Weighted
       </th>
@@ -49,10 +42,12 @@ const StocksSummaries = ({ stocks = [] } = {}) => {
       className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple"
       data-testid="stocks-summaries"
     >
-      <h2 className="text-2xl mx-4 my-6">Stocks Summaries</h2>
+      <h2 className="text-lg font-semibold md:text-2xl md:font-normal mx-4 my-6">
+        Stocks Summaries
+      </h2>
       <table className="flex flex-col mx-4 my-6">
         <TableHeaderRow />
-        <tbody>
+        <tbody className="text-sm md:text-base">
           {noStocks ? (
             <NoTradesFillerRow colSpan={5} />
           ) : (

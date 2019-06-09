@@ -54,9 +54,11 @@ class NewTrade extends React.Component {
     return (
       <div className="max-w-3xl m-8 rounded overflow-hidden shadow-lg bg-custom-dark-sea-green text-custom-dark-purple">
         <form className="mx-4 my-6">
-          <h2 className="text-2xl">Enter a new trade</h2>
+          <h2 className="text-lg font-semibold md:text-2xl md:font-normal">
+            Enter a new trade
+          </h2>
 
-          <div className="flex flex-col lg:flex-row my-2">
+          <div className="flex flex-col lg:flex-row my-2 text-sm md:text-base">
             <div className="flex flex-col lg:mr-2">
               <InputField
                 inputName="stock-symbol"
@@ -92,7 +94,7 @@ class NewTrade extends React.Component {
           <button
             type="submit"
             alt="Submit new trade"
-            className="bg-custom-light-purple hover:bg-custom-dark-purple text-custom-pale-gold font-bold rounded-full h-12 w-12 float-right m-4"
+            className="bg-custom-light-purple text-custom-pale-gold font-bold rounded-full h-12 w-12 float-right m-4 shadow hover:bg-custom-dark-purple hover:shadow-xl"
             onClick={this.onSubmit(onClick)}
             data-testid="submit-trade"
           >
