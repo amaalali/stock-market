@@ -8,11 +8,18 @@ import { NoTradesFillerRow } from "../NoTradesFillerRow";
 const TableHeaderRow = () => (
   <thead className="table__header mb-2">
     <tr className="flex flex-row">
-      <th className="text-lg w-20 mr-16 text-center">Symbol</th>
-      <th className="text-lg w-20 mr-16 text-center">Dividend Yield</th>
-      <th className="text-lg w-20 mr-16 text-center">P/E Ratio</th>
-      <th className="text-lg w-20 mr-16 text-center">Geometric Mean</th>
-      <th className="text-lg w-20 " alt="Volume Weighted Stock Price">
+      <th className="text-lg w-20 mr-16 text-center font-normal">Symbol</th>
+      <th className="text-lg w-20 mr-16 text-center font-normal">
+        Dividend Yield
+      </th>
+      <th className="text-lg w-20 mr-16 text-center font-normal">P/E Ratio</th>
+      <th className="text-lg w-20 mr-16 text-center font-normal">
+        Geometric Mean
+      </th>
+      <th
+        className="text-lg w-20 font-normal"
+        alt="Volume Weighted Stock Price"
+      >
         {/* Volume Weighted Stock Price */}
         Volume Weighted
       </th>
