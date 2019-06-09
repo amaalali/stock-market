@@ -627,6 +627,16 @@ code {
   border-color: #3C153B;
 }
 
+thead.table__header {
+  border-bottom-width: 1px;
+  border-color: #8A7389;
+  margin-bottom: 0.5rem;
+}
+
+tr.table__row-odd {
+  background-color: #B3D5C1;
+}
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;

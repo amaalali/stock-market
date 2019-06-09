@@ -24,4 +24,12 @@ code {
   @apply border-custom-dark-purple;
 }
 
+thead.table__header {
+  @apply border-b border-custom-lighter-purple mb-2;
+}
+
+tr.table__row-odd {
+  @apply bg-custom-lighter-sea-green;
+}
+
 @tailwind utilities;

@@ -42,14 +42,15 @@ export const initialState = Object.freeze({
   Store Getters
 
 */
-const priceAsString = trade => ({ ...trade, price: maths.string(trade.price) });
-export const getTrades = state => ({
-  trades: state.tradesChronology.map(priceAsString)
-});
 
 const ARBITRARY_LEVEL_OF_ACCURACY = 4; // Arbitrarily chosen level of accuracy
 const asString = (mathJsValue, levelOfAccuracy = ARBITRARY_LEVEL_OF_ACCURACY) =>
   mathJsValue.toFixed(levelOfAccuracy);
+
+const priceAsString = trade => ({ ...trade, price: asString(trade.price) });
+export const getTrades = state => ({
+  trades: state.tradesChronology.map(priceAsString)
+});
 
 export const getStocksSummaries = state => {
   const stockSummaries = Object.values(state.stocksSummaries).map(

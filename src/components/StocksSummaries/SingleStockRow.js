@@ -5,44 +5,46 @@ const SingleTradeRow = ({
   dividendYield,
   peRatio,
   geometricMean,
-  volumeWeightedStockPrice
+  volumeWeightedStockPrice,
+  dataTestId,
+  className
 }) => (
-  <>
-    <div
+  <tr className={"flex flex-row mb-1 " + className} data-testid={dataTestId}>
+    <td
       className="w-20 mr-16 test-left"
       data-testid="stocks-summaries__row--symbol"
     >
       {symbol}
-    </div>
+    </td>
 
-    <div
+    <td
       className="w-20 mr-16 text-right font-mono"
       data-testid="stocks-summaries__row--dividend-yield"
     >
       {dividendYield}
-    </div>
+    </td>
 
-    <div
+    <td
       className="w-20 mr-16 text-right font-mono"
       data-testid="stocks-summaries__row--pe-ratio"
     >
       {peRatio}
-    </div>
+    </td>
 
-    <div
+    <td
       className="w-20 mr-16 text-right font-mono"
       data-testid="stocks-summaries__row--geometric-mean"
     >
       {geometricMean}
-    </div>
+    </td>
 
-    <div
+    <td
       className="w-20 text-right font-mono"
       data-testid="stocks-summaries__row--volume-weighted-stock-price"
     >
       {volumeWeightedStockPrice}
-    </div>
-  </>
+    </td>
+  </tr>
 );
 
 export default SingleTradeRow;
