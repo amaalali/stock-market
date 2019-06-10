@@ -25,17 +25,22 @@ To avoid having to recompute values using all the trades for each stock on a new
 
 **Limitation** - since the values are computed using cached values and not computed on the full data set each time, adding functionality like revoking/removing a trade with make updating the stock summary non-trivial as compared to doing naive recalculation each time. In this case, since trades are something that are unlikely to be revoked/removed this may be an acceptable compromise.
 
-### Exposing values as only strings from the store
-
-Since all calculations are done in the reducer, the decision was made to expose numeric values (MathJS numeric types) as strings. This forces us to ensure that all computation logic are removed from React Components which will only have rendering logic.
-
 ### MathJS for computations
 
-This library provides provides more robust data types or computation, in this case we make use of their BigNumber data type (based on decimal.js). This
+This library provides provides more robust data types or computation, in this case we make use of their BigNumber data type (based on decimal.js).
+
+### Values stored as BigNumber in store but exposed as strings
+
+- Values are stored as BigNumbers in the store and only when we expose those values do we choose the level of precision that we wish to display. This is done with this helper that is configurable, but with a sensable :https://github.com/amaalali/stock-market/blob/master/src/redux/store.js#L45-L47 which is used here: https://github.com/amaalali/stock-market/blob/master/src/redux/store.js#L49 and https://github.com/amaalali/stock-market/blob/master/src/redux/store.js#L64-L67.
+
+- Since all calculations are done in the reducer, the decision was made to expose numeric values (MathJS numeric types) as strings. This forces us to ensure that all computation logic are removed from React Components which will only have rendering logic.
+
 
 ### Normalization of stocksSummaries and globalBeverageCorporationExchange
 
-compare to normalizr
+The size of `stocksSummaries` and `globalBeverageCorporationExchange` (https://github.com/amaalali/stock-market/blob/master/src/redux/store.js#L16-L21) grows with each new unique trade and for each new stock for which we have detail exchange data. To ensure that this scales as theses data sets grows (see below) and it makes updating the objects easier.
+
+(`Array.prototype.find` and `Array.prototype.filter` will scale with `O(n)` vs `O(1)` see https://stackoverflow.com/a/38445470 for a discussion).
 
 ## Future improvements
 
