@@ -15,41 +15,33 @@ export function stockSummaryReducer(state, action) {
       const { symbol, price, quantity } = action.payload;
 
       const {
-        previousSumTradedPriceQuantity = maths.bignumber(0),
-        previousSumQuantity = maths.bignumber(0),
-        previousPriceProduct = maths.bignumber(1),
-        previousGeometricMeanRoot = 0
+        cachedSumTradedPriceQuantity = maths.bignumber(0),
+        cachedSumQuantity = maths.bignumber(0),
+        cachedPriceProduct = maths.bignumber(1),
+        cachedGeometricMeanRoot = 0
       } = getStockSummary(state, symbol);
 
-      const {
-        newGeometricMeanRoot,
-        newPriceProduct,
-        newGeometricMean
-      } = newGeometricProgressionCalculator(
+      const geometricMeanCalculations = newGeometricProgressionCalculator(
         price,
-        previousPriceProduct,
-        previousGeometricMeanRoot
+        cachedPriceProduct,
+        cachedGeometricMeanRoot
       );
 
-      const {
-        newVolumeWeightedStockPrice,
-        newSumTradedPriceQuantity,
-        newSumQuantity
-      } = newVolumeWeightedStockPriceCalculator(
+      const volumeWeightedStockPriceCalculations = newVolumeWeightedStockPriceCalculator(
         price,
         quantity,
-        previousSumTradedPriceQuantity,
-        previousSumQuantity
+        cachedSumTradedPriceQuantity,
+        cachedSumQuantity
       );
 
       const stockExchangeData = getExchangeDataForStock(state, symbol);
 
-      const newDividendYield = newDividendYieldCalculator(
+      const dividendYield = newDividendYieldCalculator(
         price,
         stockExchangeData
       );
 
-      const newPeRatio = newPERatioCalculator(
+      const peRatio = newPERatioCalculator(
         price,
         stockExchangeData.lastDividend
       );
@@ -61,14 +53,10 @@ export function stockSummaryReducer(state, action) {
           [symbol]: {
             symbol,
             ...state.stocksSummaries[symbol],
-            peRatio: newPeRatio,
-            dividendYield: newDividendYield,
-            geometricMean: newGeometricMean,
-            previousPriceProduct: newPriceProduct,
-            previousGeometricMeanRoot: newGeometricMeanRoot,
-            volumeWeightedStockPrice: newVolumeWeightedStockPrice,
-            previousSumTradedPriceQuantity: newSumTradedPriceQuantity,
-            previousSumQuantity: newSumQuantity
+            ...geometricMeanCalculations,
+            ...volumeWeightedStockPriceCalculations,
+            peRatio,
+            dividendYield
           }
         }
       };

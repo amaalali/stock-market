@@ -5,16 +5,19 @@ export default function GeometricProgressionCalculator(
   previousPriceProduct,
   previousGeometricMeanRoot
 ) {
-  const newGeometricMeanRoot = previousGeometricMeanRoot + 1;
-  const newPriceProduct = maths.multiply(
+  const cachedGeometricMeanRoot = previousGeometricMeanRoot + 1;
+  const cachedPriceProduct = maths.multiply(
     previousPriceProduct,
     maths.bignumber(price)
   );
-  const newGeometricMean = maths.nthRoot(newPriceProduct, newGeometricMeanRoot);
+  const geometricMean = maths.nthRoot(
+    cachedPriceProduct,
+    cachedGeometricMeanRoot
+  );
 
   return {
-    newGeometricMeanRoot,
-    newPriceProduct,
-    newGeometricMean
+    cachedGeometricMeanRoot,
+    cachedPriceProduct,
+    geometricMean
   };
 }

@@ -27,11 +27,11 @@ export const initialState = Object.freeze({
       dividendYield: Math.BigNumber,
       peRatio: Math.BigNumber,
       geometricMean: Math.BigNumber,
-      previousPriceProduct: Math.BigNumber,
-      previousGeometricMeanRoot: Number,
+      cachedPriceProduct: Math.BigNumber,
+      cachedGeometricMeanRoot: Number,
       volumeWeightedStockPrice: Math.BigNumber,
-      previousSumTradedPriceQuantity: Math.BigNumber,
-      previousSumQuantity: Math.BigNumber,
+      cachedSumTradedPriceQuantity: Math.BigNumber,
+      cachedSumQuantity: Math.BigNumber,
       },
     }
 */

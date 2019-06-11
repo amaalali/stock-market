@@ -21,14 +21,14 @@ export default function VolumeWeightedStockPriceCalculator(
     maths.bignumber(lastTradedQuantity)
   );
 
-  const newVolumeWeightedStockPrice = maths.divide(
+  const volumeWeightedStockPrice = maths.divide(
     newSumTradedPriceQuantity,
     newSumQuantity
   );
 
   return {
-    newVolumeWeightedStockPrice,
-    newSumTradedPriceQuantity,
-    newSumQuantity
+    volumeWeightedStockPrice,
+    cachedSumTradedPriceQuantity: newSumTradedPriceQuantity,
+    cachedSumQuantity: newSumQuantity
   };
 }
