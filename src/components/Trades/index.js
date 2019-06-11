@@ -4,31 +4,10 @@ import { getTrades } from "../../redux/store";
 import Trade from "./SingleTradeRow";
 import { tableRowBackgroundIfEven } from "../helpers";
 import { NoTradesFillerRow } from "../NoTradesFillerRow";
+import { TableHeaderRow } from "./TableHeaderRow";
 
 const tableRowKey = (symbol, price, quantity, createdAt) =>
   createdAt + "-" + symbol + "-" + price + "-" + quantity;
-
-const TableHeaderRow = () => (
-  <thead className="table__header">
-    <tr className="flex flex-row mb-2">
-      <th className="w-16 mr-16 font-normal">Symbol</th>
-      <th className="w-16 mr-16 font-normal">Price</th>
-      <th className="w-16 font-normal">Quantity</th>
-    </tr>
-  </thead>
-);
-
-const TableRows = ({ trades }) =>
-  trades.map(({ symbol, price, quantity, createdAt }, index) => (
-    <Trade
-      key={tableRowKey(symbol, price, quantity, createdAt)}
-      className={tableRowBackgroundIfEven(index)}
-      symbol={symbol}
-      price={price}
-      quantity={quantity}
-      dataTestId={`recent-trades__row-${index + 1}`}
-    />
-  ));
 
 const Trades = ({ trades }) => {
   const noTrades = trades.length === 0;
@@ -47,7 +26,16 @@ const Trades = ({ trades }) => {
           {noTrades ? (
             <NoTradesFillerRow colSpan={3} />
           ) : (
-            <TableRows trades={trades} />
+            trades.map(({ symbol, price, quantity, createdAt }, index) => (
+              <Trade
+                key={tableRowKey(symbol, price, quantity, createdAt)}
+                className={tableRowBackgroundIfEven(index)}
+                symbol={symbol}
+                price={price}
+                quantity={quantity}
+                dataTestId={`recent-trades__row-${index + 1}`}
+              />
+            ))
           )}
         </tbody>
       </table>
